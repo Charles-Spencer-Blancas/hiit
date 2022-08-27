@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'hiitTimer.dart';
+import 'hiit_timer.dart';
 
 void main() {
   runApp(const MyApp());
