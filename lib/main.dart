@@ -49,6 +49,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String name = "Basic HIIT";
+  Duration warmUpTime = Duration(minutes: 5);
+  Duration coolDownTime = Duration(minutes: 5);
+  Duration effortTime = Duration(seconds: 10);
+  Duration restTime = Duration(seconds: 5);
+  int reps = 5;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -58,12 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     HiitType hiitType2 = HiitType(
-        name: "test",
-        warmUpTime: Duration(seconds: 5),
-        coolDownTime: Duration(seconds: 5),
-        effortTime: Duration(seconds: 5),
-        restTime: Duration(seconds: 5),
-        reps: 5);
+        name: name,
+        warmUpTime: warmUpTime,
+        coolDownTime: coolDownTime,
+        effortTime: effortTime,
+        restTime: restTime,
+        reps: reps);
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
