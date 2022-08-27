@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CountdownTimer extends StatefulWidget {
-  const CountdownTimer({super.key});
+  final HiitType hiitType;
+
+  const CountdownTimer({super.key, required this.hiitType});
 
   @override
   State<StatefulWidget> createState() => _CountdownTimerState();
@@ -30,13 +31,6 @@ class HiitType {
 enum TimerType { notStarted, warmUp, effort, rest, coolDown }
 
 class _CountdownTimerState extends State<CountdownTimer> {
-  HiitType hiitType = HiitType(
-      name: "test",
-      warmUpTime: const Duration(seconds: 5),
-      coolDownTime: const Duration(seconds: 5),
-      effortTime: const Duration(seconds: 5),
-      restTime: const Duration(seconds: 5),
-      reps: 5);
   Timer? countDown;
   bool isCountingDown = false;
   Duration? currentTimer;
@@ -45,7 +39,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
 
   void startHiit() {
     setState(() {
-      currentTimer = hiitType.warmUpTime;
+      currentTimer = widget.hiitType.warmUpTime;
       timerType = TimerType.warmUp;
       countDown = Timer.periodic(const Duration(milliseconds: 1), (timer) {
         performHiit();
@@ -61,20 +55,20 @@ class _CountdownTimerState extends State<CountdownTimer> {
         countDown!.cancel();
         switch (timerType) {
           case TimerType.warmUp:
-            currentTimer = hiitType.effortTime;
+            currentTimer = widget.hiitType.effortTime;
             timerType = TimerType.effort;
             break;
           case TimerType.effort:
-            currentTimer = hiitType.restTime;
+            currentTimer = widget.hiitType.restTime;
             timerType = TimerType.rest;
             break;
           case TimerType.rest:
-            if (doneReps < hiitType.reps) {
-              currentTimer = hiitType.effortTime;
+            if (doneReps < widget.hiitType.reps) {
+              currentTimer = widget.hiitType.effortTime;
               timerType = TimerType.effort;
               doneReps++;
             } else {
-              currentTimer = hiitType.coolDownTime;
+              currentTimer = widget.hiitType.coolDownTime;
               timerType = TimerType.coolDown;
             }
             break;
@@ -83,6 +77,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
           case TimerType.notStarted:
             break;
         }
+
         countDown = Timer.periodic(const Duration(milliseconds: 1), (timer) {
           performHiit();
         });
@@ -141,10 +136,10 @@ class _CountdownTimerState extends State<CountdownTimer> {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Text("Name: ${hiitType.name}"),
+      Text("Name: ${widget.hiitType.name}"),
       Text(displayTimerType(timerType)),
       Text("{$currentTimer}"),
-      Text("$doneReps out of ${hiitType.reps}"),
+      Text("$doneReps out of ${widget.hiitType.reps}"),
       ElevatedButton(
         onPressed: currentTimer == null ? startHiit : null,
         child: const Text("Start"),
