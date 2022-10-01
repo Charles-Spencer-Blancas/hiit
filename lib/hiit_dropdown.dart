@@ -1,13 +1,12 @@
 import 'dart:async';
-
+import 'hiit_timer.dart';
+import 'hiit_type.dart';
 import 'package:flutter/material.dart';
 
-import 'hiit_type.dart';
-
-class CountdownTimer extends StatefulWidget {
+class HiitDropdown extends StatefulWidget {
   final HiitType hiitType;
 
-  const CountdownTimer({super.key, required this.hiitType});
+  const HiitDropdown({super.key, required this.hiitType});
 
   @override
   State<StatefulWidget> createState() => _CountdownTimerState();
