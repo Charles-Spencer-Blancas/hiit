@@ -20,7 +20,7 @@ class HiitType {
 List<HiitType> hiitTypes = [
   HiitType(
       name: "Basic",
-      warmUpTime: Duration(minutes: 5),
+      warmUpTime: Duration(seconds: 1),
       coolDownTime: Duration(minutes: 5),
       effortTime: Duration(minutes: 5),
       restTime: Duration(minutes: 5),

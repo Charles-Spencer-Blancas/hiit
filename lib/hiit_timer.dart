@@ -121,10 +121,15 @@ class _CountdownTimerState extends State<CountdownTimer> {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Text("Name: ${widget.hiitType.name}"),
-      Text(displayTimerType(timerType)),
-      Text("${currentTimer ?? "No Timer"}"),
-      Text("$doneReps out of ${widget.hiitType.reps}"),
+      Text(
+        displayTimerType(timerType),
+      ),
+      Text(
+        "${currentTimer ?? "No Timer"}",
+        style: const TextStyle(fontSize: 50),
+      ),
+      if (timerType == TimerType.effort || timerType == TimerType.rest)
+        Text("$doneReps out of ${widget.hiitType.reps}"),
       ElevatedButton(
         onPressed: currentTimer == null ? startHiit : null,
         child: const Text("Start"),
